@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://sspstatic.vivo.com.cn/ssp/js/vadevent.1.0.0.js"></script>
+    <!-- <script src="https://apph5wsdl.vivo.com.cn/appstore/ad/ssp/js/vadevent.1.0.0.js"></script> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #Box {
+            width: 100%;
+            border: 0;
+            height: 100vh;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <button onclick="sendvivo()">发送上报</button> -->
+    <iframe id="Box" src="https://u.alipay.cn/_4AzepCW04QGDzn26Jmf99v" frameborder="0"></iframe>
+    <script>
+        let objSearch = {
+            hid: "999",
+        };
+        function getUrlParams(urlParam = "") {
+            // 截取url后面参数
+            const search_url = urlParam || window.location.search;
+            let myyyy = search_url.substring(1, search_url.length);
+            if (!myyyy) {
+                return objSearch;
+            }
+            let nerList = myyyy.split("&");
+            for (let i = 0; i < nerList.length; i++) {
+                objSearch[nerList[i].split("=")[0]] = decodeURIComponent(
+                    nerList[i].split("=")[1]
+                );
+            }
+            return objSearch;
+        }
+        getUrlParams()
+        console.log(objSearch)
+        function sendvivo() {
+            console.log('-')
+            // var actName = 'submit';
+            // var actProp = { act: 'submit', name: '表单组件' };
+            // VAD_EVENT.sendAction(actName, actProp);
+        }
+        function getRandomNumber(n, m) {
+            var random = Math.floor(Math.random() * (m - n + 1) + n)
+            return random
+        }
+        function getConfig(hid = '0') {
+            var url = "https://new.zixunkankan.top/api/h5setting?hid=" + hid;//绝对路径不容易出错，任何情况下都可以访问到。
+            //1、声明载体xhr对象
+            var xhr = new XMLHttpRequest();
+            //2、发起请求，设置请求方式，地址，异步
+            xhr.open("get", url, true);//默认为true也就是异步
+            //3、等待接通
+            //3、通过事件监听状态
+            xhr.onreadystatechange = function () {
+                //readyState状态:ajax的执行阶段
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // console.log(xhr.responseText);
+                    const response = JSON.parse(xhr.responseText)
+                    console.log(response)
+                    const randomNum = getRandomNumber(1, 100)
+                    if (randomNum <= response.data.rate) {
+                        sendvivo()
+                    }
+                }
+            }
+            //4、发送
+            xhr.send(null);
+        }
+        getConfig(objSearch.hid)
+    </script>
+</body>
+
+</html>

