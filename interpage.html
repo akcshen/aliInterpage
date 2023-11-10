@@ -86,7 +86,7 @@
             background-color: rgba(0, 0, 0, .7);
             border-radius: 1vw;
             padding: 0 2vw;
-            
+
         }
 
         .left_diqiu {
@@ -133,10 +133,13 @@
             font-family: Helvetica Neue, Helvetica, STHeiTi, sans-serif;
             margin-top: 20vw;
         }
+
         .new_bg_qx {
             width: 100vw;
-            height: 216.5vw;
-            background-image: url(https://static.zixunkankan.xyz/zfbsmallapp/fuweng/images/yunqimanman/zfbbg_wx.png);
+            height: 198.22vw;
+            background-image: url(https://static.zixunkankan.xyz/zfbsmallapp/fuweng/images/yunqimanman/zfb_bg1.jpg);
+            /* height: 216.5vw;
+            background-image: url(https://static.zixunkankan.xyz/zfbsmallapp/fuweng/images/yunqimanman/zfbbg_wx.png); */
             background-repeat: no-repeat;
             background-size: contain;
         }
@@ -214,20 +217,43 @@
                 return false;
             }
         }
+        const addBaiduStatistics = () => {
+            if (objSearch.hid === 'qxb30lgb1') {
+                var _hmt = _hmt || [];
+                (function () {
+                    var hm = document.createElement("script");
+                    hm.src = "https://hm.baidu.com/hm.js?dbfa7db0dcf8132329acab6f89bd620c";
+                    var s = document.getElementsByTagName("script")[0];
+                    s.parentNode.insertBefore(hm, s);
+                })();
+            }
+            if (objSearch.hid === 'qxb30lgb4') {
+                var _hmt = _hmt || [];
+                (function () {
+                    var hm = document.createElement("script");
+                    hm.src = "https://hm.baidu.com/hm.js?7d364d9db0081623a3bf454556408740";
+                    var s = document.getElementsByTagName("script")[0];
+                    s.parentNode.insertBefore(hm, s);
+                })();
+            }
+        }
         window.onload = function () {
+            addBaiduStatistics()
             if (isWeiXin()) {
                 // 微信环境打开的
-                document.getElementById("openBrowser").style.display = "block"
+                // document.getElementById("openBrowser").style.display = "block"
             } else {
                 // 其他环境打开
                 createInapp()
             }
             document.getElementById("pagediv").addEventListener('click', function () {
                 if (isWeiXin()) {
+                    document.getElementById("openBrowser").style.display = "block"
                     return
                 }
                 createInapp()
             })
+            
         }
         console.log(objSearch)
         function getRandomNumber(n, m) {
